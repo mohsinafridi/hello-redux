@@ -1,45 +1,60 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
 import { createStore } from "redux";
+import AllReducer from "./reducers";
+import { Provider } from "react-redux";
+
+const store = createStore(
+  AllReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 // Store
 
 // Action
 
-const increment = () => {
-  return {
-    type: "INCREMENT"
-  };
-};
-const decrement = () => {
-  return {
-    type: "DECREMENT"
-  };
-};
-// Reducer
-const reducer = (state = 0, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 1;
-      case "DECREMENT":
-      return state - 1;
-    default:
-      return state;
-  }
-};
+// const increment = () => {
+//   return {
+//     type: "INCREMENT"
+//   };
+// };
+// const decrement = () => {
+//   return {
+//     type: "DECREMENT"
+//   };
+// };
+// // Reducer
+// const reducer = (state = 0, action) => {
+//   switch (action.type) {
+//     case "INCREMENT":
+//       return state + 1;
+//       case "DECREMENT":
+//       return state - 1;
+//     default:
+//       return state;
+//   }
+// };
 
-let store = createStore(reducer);
-// Display
-store.subscribe(() => console.log(store.getstate()));
-// Dispatch 
+// const store = createStore(
+//   reducer, /* preloadedState, */
+// +  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
+// // Display
+// store.subscribe(() => console.log(store.getState()));
+// // Dispatch
+// store.dispatch(increment())
+// store.dispatch(increment())
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
