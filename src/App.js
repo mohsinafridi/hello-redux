@@ -1,24 +1,48 @@
 import React from "react";
-import {useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from "./actions/counter-action";
+import { connect } from "react-redux";
+
 import { logged } from "./actions/logged-action";
 
-function App() {
-  const state  = useSelector(state => state.counter);
-  const isLoggedIn = useSelector(state => state.isLogged);
+import * as counter from "./actions/counter-action";
 
-  const dispatch = useDispatch()
+
+const App = ({
+  counter,
+  isLoggedIn,
+  incrementNumber,
+  decrementNumber,
+  loggedIn,
+}) => {
+  
   return (
-    <div className="App">      
-      <h3>{state}</h3>
-      <button onClick={()=> dispatch(increment(5))}>+ (by 5)</button>
-      <button onClick={()=> dispatch(decrement(3))}>- (by 3)</button>
+    <div className="App">
+      <h3>{counter}</h3>
+      <button onClick={() => incrementNumber(5)}>+ (by 5)</button>
+      <button onClick={() => decrementNumber(3)}>- (by 3)</button>
 
-      {isLoggedIn ? <h4 >Your are LoggedIn. </h4 > : <h3>You are Not LoggedIn.</h3>}
-      <button onClick={()=> dispatch(logged())}>Log in</button>
+      {isLoggedIn ? (
+        <h4>Your are LoggedIn. </h4>
+      ) : (
+        <h3>You are Not LoggedIn.</h3>
+      )}
+      <button onClick={() => loggedIn()}>Log in</button>
     </div>
   );
-}
+};
 
-export default App;
- 
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter,
+    isLoggedIn: state.isLogged,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    incrementNumber: () => dispatch(counter.increment(5)),
+    decrementNumber: () => dispatch(counter.decrement(3)),
+    loggedIn: () => dispatch(logged()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

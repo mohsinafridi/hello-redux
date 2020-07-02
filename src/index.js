@@ -12,42 +12,6 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-// Store
-
-// Action
-
-// const increment = () => {
-//   return {
-//     type: "INCREMENT"
-//   };
-// };
-// const decrement = () => {
-//   return {
-//     type: "DECREMENT"
-//   };
-// };
-// // Reducer
-// const reducer = (state = 0, action) => {
-//   switch (action.type) {
-//     case "INCREMENT":
-//       return state + 1;
-//       case "DECREMENT":
-//       return state - 1;
-//     default:
-//       return state;
-//   }
-// };
-
-// const store = createStore(
-//   reducer, /* preloadedState, */
-// +  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-// );
-// // Display
-// store.subscribe(() => console.log(store.getState()));
-// // Dispatch
-// store.dispatch(increment())
-// store.dispatch(increment())
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
